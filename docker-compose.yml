@@ -1,0 +1,20 @@
+services:
+  node:
+    container_name: node_server
+    build:
+      context: .
+      dockerfile: ./docker_compose/node/Dockerfile
+    command: /start.sh
+    ports:
+      - "3000:3000"
+
+  django:
+    container_name: django_server
+    build:
+      context: .
+      dockerfile: ./docker_compose/django/Dockerfile
+    command: /start.sh
+    depends_on:
+      - node
+    ports:
+      - "8000:8000"
